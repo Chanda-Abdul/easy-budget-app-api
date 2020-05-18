@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate",
+  "name": "easy-budget-full-stack-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,9 @@
     "expect": true
   },
   "keywords": [],
+  "engines": {
+    "node": "12.16.0"
+    },
   "author": "",
   "license": "ISC",
   "dependencies": {
