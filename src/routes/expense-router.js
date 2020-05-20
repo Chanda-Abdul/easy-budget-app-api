@@ -1,6 +1,7 @@
+//handles response and requests
+
 const path = require("path");
 const express = require("express");
-const xss = require("xss");
 const Component1Service = require('./component-services');
 
 const componentRouter = express.Router();

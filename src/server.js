@@ -1,12 +1,17 @@
 const knex = require('knex')
 const express = require('express');
 const app = express();
-const {PORT, DB_URL } = ('./config');
+const { PORT, DB_URL } = require('./config');
 
 const db = knex({
     client: 'pg',
-    connection: process.env.DB_URL,
+    connection: DB_URL,
 })
+
+const knexTest = db.select().table('expense_type');
+
+// console.log(knexTest);
+console.log(PORT, DB_URL);
 
 app.set('db', db)
 
