@@ -1,7 +1,7 @@
 CREATE TABLE budget_expenses (
     id serial PRIMARY KEY,
     name TEXT NOT NULL,
-    amount NUMERIC(10,2),
+    amount MONEY NOT NULL,
     type_id INTEGER REFERENCES expense_type(id),
     category budget_category,
     date TIMESTAMPTZ DEFAULT now() NOT NULL

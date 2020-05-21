@@ -51,4 +51,14 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response);
 });
 
+//endpoints => move later
+app.get('/create', (req, res) => {
+
+})
+//budget endpoint => move later
+app.get('/budget', (req, res) => {
+  //search options by type or category
+  
+})
+
 module.exports = app;
