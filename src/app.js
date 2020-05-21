@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { NODE_ENV } = require("./config");
+const { NODE_ENV, CLIENT_ORIGIN } = require("./config");
 const helmet = require("helmet");
 const winston = require('winston');
 
@@ -12,13 +12,22 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 
 app.use(morgan(morganOption));
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: CLIENT_ORIGIN
+})
+);
 
 // //import routers
 // const componentRouter = require('./component1/component1-router')
 
 // //link to routers
 // app.use('/api/component1', component1Router);
+
+function handleGetExpenses(req, res) {
+  res.send('Hello, expenses coming right up!')
+}
+
+app.get("/expenses", handleGetExpenses);
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
