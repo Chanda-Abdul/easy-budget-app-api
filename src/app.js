@@ -1,15 +1,24 @@
 require("dotenv").config();
-const express = require("express");
+const knex = require('knex')
+const express = require('express');
 const morgan = require("morgan");
 const cors = require("cors");
-const { NODE_ENV, CLIENT_ORIGIN } = require("./config");
+const { NODE_ENV, CLIENT_ORIGIN, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
 const winston = require('winston');
+//import routers
+const expenseRoutes = require('./routes/expense-router')
+const db = knex({
+  client: 'pg',
+  connection: DB_URL,
+})
 
 const app = express();
-
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
+const knexTest = db.select().table('expense_type');
 
+app.set('db', db)
+app.use(expenseRoutes)
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors({
@@ -17,21 +26,14 @@ app.use(cors({
 })
 );
 
-// //import routers
-// const componentRouter = require('./component1/component1-router')
 
-// //link to routers
+// console.log(knexTest);
+console.log(PORT, DB_URL);
+
+
+// //link to routers?services
 // app.use('/api/component1', component1Router);
 
-function handleGetExpenses(req, res) {
-  res.send('Hello, expenses coming right up!')
-}
-
-app.get("/expenses", handleGetExpenses);
-
-app.get("/", (req, res) => {
-  res.send("Hello, world!");
-});
 
 //logger middleware
 const logger = winston.createLogger({
@@ -60,14 +62,26 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response);
 });
 
-//endpoints => move later
-app.get('/create', (req, res) => {
+// //endpoints => move later
+// app.get('/create', (req, res) => {
 
-})
-//budget endpoint => move later
-app.get('/budget', (req, res) => {
-  //search options by type or category
+// })
+// //budget endpoint => move later
+// app.get('/budget', (req, res) => {
+//   //search options by type or category
   
-})
+// })
+
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`)
+});
+
 
 module.exports = app;
+
+
+
+
+
+
+

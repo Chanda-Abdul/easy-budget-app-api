@@ -1,13 +1,53 @@
-//handles response and requests
-
 const path = require("path");
 const express = require("express");
-const ExpenseService = require('./component-services');
+// const ExpenseService = require('../services/expense-service');
 
-const componentRouter = express.Router();
+const expenseRouter = require('express').Router();
 const jsonParser = express.json();
 
+function handleGetExpenses(req, res) {
+  res.send('Hello, expenses coming right up!')
+}
 
+expenseRouter.get('/api/expenses', handleGetExpenses)
+
+expenseRouter.post('/', (req, res) => {
+  //add new expense to budget_expense table
+  //how can I make this a function or an enpoint of /api/expenses
+  res.send('POST Request received');
+});
+
+expenseRouter.delete('/', (req, res) => {
+  //delete expenses from budget_expense table
+  res.send('DELETE Request received');
+});
+
+expenseRouter.put('/', (req, res) => {
+  //update budget_expense table with new expense
+  res.send('PUT Request received');
+});
+
+
+// function handlePostExpenses(req, res) {
+//   res.send('Adding a new expense!')
+// }
+
+// expenseRouter.post('/api/expenses', handlePostExpenses)
+
+
+// expenseRouter.get('/', (req, res) => {
+//   res.send("Hello, world from expenseRouter!");
+// });
+
+
+
+// expenseRouter.get('/expenses', (req, res) => {
+//   // return a list of expensess
+// });
+
+// expenseRouter.post('/expenses', (req, res) => {
+//   // create a new expenses
+// });
 
 
 // const serializeComponent = (component) => ({
@@ -98,4 +138,4 @@ const jsonParser = express.json();
 //         .catch(next);
 //     });
   
-  module.exports = componentsRouter;
+  module.exports = expenseRouter;

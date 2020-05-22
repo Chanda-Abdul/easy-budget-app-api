@@ -1,14 +1,14 @@
 //handles any operations related to database
 //handling promises
 
-// class ExpenseService {
-//     async getAllTypes(knex) {
-//         const types = await knex.select('*')
-//         .from('expense_type')
-//         return types
+class ExpenseService {
+    async getAllTypes(knex) {
+        const types = await knex.select('*')
+        .from('expense_type')
+        return types
         
-//     }
-// }
+    }
+}
 
 // const ComponentsService = {
 //     getAllComponents(knex) {
