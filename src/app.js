@@ -5,9 +5,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { NODE_ENV, CLIENT_ORIGIN, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
-const winston = require('winston');
+
 //import routers
-const expenseRoutes = require('./routes/expense-router')
+const expenseRouter = require('./routes/expense-router')
+// const createRouter = require('./routes/create-router')
 const db = knex({
   client: 'pg',
   connection: DB_URL,
@@ -18,9 +19,11 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 const knexTest = db.select().table('expense_type');
 
 app.set('db', db)
-app.use(expenseRoutes)
+app.use(expenseRouter)
+// app.use(createRouter)
 app.use(morgan(morganOption));
 app.use(helmet());
+app.use(express.json())
 app.use(cors({
   origin: CLIENT_ORIGIN
 })
@@ -33,22 +36,6 @@ console.log(PORT, DB_URL);
 
 // //link to routers?services
 // app.use('/api/component1', component1Router);
-
-
-//logger middleware
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.File({ filename: 'info.log' })
-  ]
-});
-
-if (NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple()
-  }));
-}
 
 //error handler middleware, move to middleware folder later
 app.use(function errorHandler(error, req, res, next) {

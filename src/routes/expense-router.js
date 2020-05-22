@@ -1,25 +1,110 @@
 const path = require("path");
 const express = require("express");
+const { v4: uuid } = require('uuid');
+const logger = require('../logger')
 // const ExpenseService = require('../services/expense-service');
 
 const expenseRouter = require('express').Router();
-const jsonParser = express.json();
+const bodyParser = express.json();
 
-function handleGetExpenses(req, res) {
+expenseRouter
+.route('/api/expenses')
+.get((req, res) => {
   res.send('Hello, expenses coming right up!')
-}
+  /* insert code here*/
+})
+.post(bodyParser, (req, res) => {/* insert code here*/})
 
-expenseRouter.get('/api/expenses', handleGetExpenses)
+expenseRouter
+.route('api/expenses/:expenseId')
+.get((req, res) => {/* insert code here*/})
+.delete((req, res) => {/* insert code here*/})
 
-expenseRouter.post('/', (req, res) => {
+
+
+
+expenseRouter.post('/', (req, res, bodyParser) => {
   //add new expense to budget_expense table
   //how can I make this a function or an enpoint of /api/expenses
+  //get the data
+  const { name, amount, category, type, date=false } = req.body;
+  //validation
+  if (!name) {
+    return res
+    .status(400)
+    .send('Expense name required');
+  }
+  if (!amount) {
+    return res
+    .status(400)
+    .send('Dollar amount required');
+  }
+  if (!category) {
+    return res
+    .status(400)
+    .send('Please choose a category');
+  }
+  //should I use this to validate the type and category options?
+  // const clubs = [
+  //   'Cache Valley Stone Society',
+  //   'Ogden Curling Club',
+  //   'Park City Curling Club',
+  //   'Salt City Curling Club',
+  //   'Utah Olympic Oval Curling Club'
+  // ];
+
+  // // make sure the club is valid
+  // if (!clubs.includes(favoriteClub)) {
+  //   return res
+  //     .status(400)
+  //     .send('Not a valid club');
+  // }
+  if (!type) {
+    return res
+    .status(400)
+    .send('please select an expense type');
+  }
   res.send('POST Request received');
+
+  const id = uuid();
+  const newExpense = {
+    name, 
+    amount, 
+    category, 
+    type, 
+    date
+  };
+
+  expense.push(newExpense);
+
+  res.send('All validation passed');
+
+  res
+  .status(201)
+  .location(`http://localhost:8080/expense/${id}`)
+  .json(newExpense);
 });
 
-expenseRouter.delete('/', (req, res) => {
+
+
+expenseRouter
+.delete('/', (req, res) => {
   //delete expenses from budget_expense table
-  res.send('DELETE Request received');
+  //need to make this work with /api/expense/:expenseId
+  const { expenseId } = req.params;
+
+  //make sure there is actually data at that id
+  if (index === -1 ) {
+    return res
+    .status(404)
+    .send('Expense not found');
+  }
+
+  handleGetExpenses.splice(index, 1);
+  
+  res
+  .status(204)
+  .end();
 });
 
 expenseRouter.put('/', (req, res) => {
@@ -67,7 +152,7 @@ expenseRouter.put('/', (req, res) => {
 //         })
 //         .catch(next);
 //     })
-//     .post(jsonParser, (req, res, next) => {
+//     .post(bodyParser, (req, res, next) => {
 //       const { component_label, content, othercomponenet_id } = req.body;
 //       const newComponent = { component_label, content, othercomponenet_id};
   

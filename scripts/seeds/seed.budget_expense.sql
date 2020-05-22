@@ -10,12 +10,12 @@ VALUES
   (8, 'Car Payment', 475.00 , 10, 'Discretionary'),
   (9, 'Shell Gas', 75.00 , 10, 'Discretionary'),
   (10, 'West Elm', 2475.00 , 15, 'Discretionary'),
-  (11, 'Trader Joes, 275.00 , 12, 'Discretionary'),
+  (11, 'Trader Joes', 275.00 , 12, 'Discretionary'),
   (12, 'Eat Inn', 175.00 , 11, 'Discretionary'),
   (13, 'Amazon', 675.00 , 14, 'Discretionary'),
   (14, 'Lemonade Renters Insurance', 22.00 , 21, 'Discretionary'),
   (15, 'Feed America', 400.00 , 17, 'Discretionary');
-               m
+               
 --   (1, 'Rent'),
 --   (2, 'Electricity'),
 --   (3, 'Gas'),
