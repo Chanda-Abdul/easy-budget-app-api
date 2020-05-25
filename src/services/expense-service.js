@@ -1,50 +1,49 @@
 //handles any operations related to database
 //handling promises
 
-class ExpenseService {
-    async getAllTypes(knex) {
-        const types = await knex.select('*')
-        .from('expense_type')
-        return types
-        
-    }
-}
+const ExpenseService = {
+  getAllExpenses(
+    knex
+    //   req, res
+  ) {
+    return knex.select("*").from("budget_expenses");
+    const db = req.app.get("db");
+    // console.log("db", db);
+    /* insert code here*/
+    return db
+      .select("*")
+      .from("budget_expenses")
+      .then((expenses) =>
+        res.json({
+          expenses,
+        })
+      )
+      .catch((err) =>
+        res.json({
+          err,
+        })
+      );
+  },
+  insertExpense(knex, newExpense) {
+    return knex
+      .insert(newExpense)
+      .into("budget_expenses")
+      .returning("*")
+      .then((rows) => {
+        return rows[0];
+      });
+  },
+  getById(knex, id) {
+    return knex.from("budget_expense").select("*").where("id", id).first();
+  },
+  deleteExpense(knex, id) {
+    return knex("budget_expenses").where({ id }).delete();
+  },
+  updateExpense(knex, id, newExpenseFields) {
+    return knex("budget_expenses")
+    .where({ id })
+    .update(newExpenseFields);
+  },
+};
 
-// const ComponentsService = {
-//     getAllComponents(knex) {
-//         return knex
-//         .select('*')
-//         .from('Componentful_Components')
-//     },
-//     insertComponent(knex, newComponent) {
-//         return knex
-//         .insert(newComponent)
-//         .into('Componentful_Components')
-//         .returning('*')
-//         .then(rows => {
-//             return rows[0]
-//         })
-//     },
-//     getbyId(knex, id) {
-//         return knex
-//         .from('Componentful_Components')
-//         .select('*')
-//         .where('id', id)
-//         .first()
-//     },
-//     deleteComponent(knex, id) {
-//         return knex('Componentful_Components')
-//         .where({ id })
-//         .delete()
-//     },
-//     updateComponent(knex, id, newComponentFields) {
-//         return knex('Componentful_Components')
-//         .where({ id })
-//         .update(newComponentFields)
-//     },
-// }
-
-const newExpenses = new ExpenseService();
-console.log(newExpenses.getAllTypes)
-
-module.exports = new ExpenseService();
+module.exports = ExpenseService;

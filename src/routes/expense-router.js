@@ -2,96 +2,115 @@ const path = require("path");
 const express = require("express");
 const { v4: uuid } = require('uuid');
 const logger = require('../logger')
-// const ExpenseService = require('../services/expense-service');
-
+const ExpenseService = require('../services/expense-service');
 const expenseRouter = require('express').Router();
-const bodyParser = express.json();
+
+const expenses = [];
 
 expenseRouter
 .route('/api/expenses')
-.get((req, res) => {
-  res.send('Hello, expenses coming right up!')
-  /* insert code here*/
-})
-.post(bodyParser, (req, res) => {/* insert code here*/})
+.get(ExpenseService.getAllExpenses).then(expense => {
+  res.json(expenses)
+}).catch(next)
+.post((req, res, next) => {
+  console.log(req.body);
+  const { name, amount, type_id, category="Discretionary", date=false } = req.body;
+//validation code here? (review POST and DELETE request to add validation)
+const id = uuid();
+//set date to now
+const newExpense = {
+  id, 
+  name, 
+  amount, 
+  category, 
+  type_id, 
+  date
+};
 
-expenseRouter
-.route('api/expenses/:expenseId')
-.get((req, res) => {/* insert code here*/})
-.delete((req, res) => {/* insert code here*/})
+// expenses.push(newExpense);
 
-
-
-
-expenseRouter.post('/', (req, res, bodyParser) => {
-  //add new expense to budget_expense table
-  //how can I make this a function or an enpoint of /api/expenses
-  //get the data
-  const { name, amount, category, type, date=false } = req.body;
-  //validation
-  if (!name) {
-    return res
-    .status(400)
-    .send('Expense name required');
-  }
-  if (!amount) {
-    return res
-    .status(400)
-    .send('Dollar amount required');
-  }
-  if (!category) {
-    return res
-    .status(400)
-    .send('Please choose a category');
-  }
-  //should I use this to validate the type and category options?
-  // const clubs = [
-  //   'Cache Valley Stone Society',
-  //   'Ogden Curling Club',
-  //   'Park City Curling Club',
-  //   'Salt City Curling Club',
-  //   'Utah Olympic Oval Curling Club'
-  // ];
-
-  // // make sure the club is valid
-  // if (!clubs.includes(favoriteClub)) {
-  //   return res
-  //     .status(400)
-  //     .send('Not a valid club');
-  // }
-  if (!type) {
-    return res
-    .status(400)
-    .send('please select an expense type');
-  }
-  res.send('POST Request received');
-
-  const id = uuid();
-  const newExpense = {
-    name, 
-    amount, 
-    category, 
-    type, 
-    date
-  };
-
-  expense.push(newExpense);
-
-  res.send('All validation passed');
+// res.send('All validation passed')
+  return res.json({
+    id, name, amount, type_id, category, date 
+  })
 
   res
   .status(201)
-  .location(`http://localhost:8080/expense/${id}`)
-  .json(newExpense);
-});
+  .location(`http://localhost:8080/user/${id}`)
+  .json({id: id});
 
+  
+  // res.send('this is the post request')
+  // //add new expense to budget_expense table
+  // //how can I make this a function or an enpoint of /api/expenses
+  // //get the data
+  // const { name, amount, category, type, date=false } = req.body;
+  // //validation
+  // if (!name) {
+  //   return res
+  //   .status(400)
+  //   .send('Expense name required');
+  // }
+  // if (!amount) {
+  //   return res
+  //   .status(400)
+  //   .send('Dollar amount required');
+  // }
+  // if (!category) {
+  //   return res
+  //   .status(400)
+  //   .send('Please choose a category');
+  // }
+  // //should I use this to validate the type and category options?
+  // // const clubs = [
+  // //   'Cache Valley Stone Society',
+  // //   'Ogden Curling Club',
+  // //   'Park City Curling Club',
+  // //   'Salt City Curling Club',
+  // //   'Utah Olympic Oval Curling Club'
+  // // ];
 
+  // // // make sure the club is valid
+  // // if (!clubs.includes(favoriteClub)) {
+  // //   return res
+  // //     .status(400)
+  // //     .send('Not a valid club');
+  // // }
+  // if (!type) {
+  //   return res
+  //   .status(400)
+  //   .send('please select an expense type');
+  // }
+  // res.send('POST Request received');
+
+ 
+
+  // expense.push(newExpense);
+
+  // res.send('All validation passed');
+
+  // res
+  // .status(201)
+  // .location(`http://localhost:8080/expense/${id}`)
+  // .json(newExpense);
+  /* insert code here*/
+})
 
 expenseRouter
-.delete('/', (req, res) => {
+.route('/api/expenses/:id')
+.get(ExpenseService.getAllExpenses, (req, res) => {
+  /* insert code here*/
+  const { id } = req.params;
+  console.log(id);
+}
+)
+.delete((req, res) => {
+  /* insert code here*/
   //delete expenses from budget_expense table
   //need to make this work with /api/expense/:expenseId
-  const { expenseId } = req.params;
+  const { id } = req.params;
+  
+  const index = expenses.findIndex(e => e.id === id);
 
   //make sure there is actually data at that id
   if (index === -1 ) {
@@ -110,7 +129,15 @@ expenseRouter
 expenseRouter.put('/', (req, res) => {
   //update budget_expense table with new expense
   res.send('PUT Request received');
-});
+})
+
+
+
+
+
+
+
+
 
 
 // function handlePostExpenses(req, res) {
