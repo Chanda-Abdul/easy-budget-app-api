@@ -7,15 +7,22 @@ const expenseRouter = express.Router();
 const jsonParser = express.json()
 const knex = require("knex");
 
-// const expenses = [];
+const serializeExpense = expense => ({
+  id: expense.id,
+  name: expense.name,
+  amount: expense.amount,
+  type_id: expense.type_id,
+  category: expense.category,
+})
 
 expenseRouter
-.route('/expenses').get((req, res, next) => {
+.route('/api/expenses')
+.get((req, res, next) => {
   ExpenseService.getAllExpenses(
     req.app.get('db')
   )
   .then(expenses => {
-    res.json(expense)
+    res.json(expenses.map(serializeExpense))
   })
   .catch(next)
 .post(jsonParser, (req, res, next) => {
@@ -31,6 +38,13 @@ const newExpense = {
   type_id, 
   date
 };
+for (const [key, value] of Object.entries(newExpense)) {
+  if (value == null) {
+  return res.status(400).json({
+    error: { message: `Missing '${key}' in request body` }
+  })
+}
+}
 ExpenseService.insertExpense(
   req.app.get('db'),
 newExpense
@@ -38,54 +52,68 @@ newExpense
 .then(expense => {
   res
   .status(201)
-  .location(`/expenses/${expense.id}`)
-  .json(expense)
+  .location(path.posix.join(req.originalUrl, `/${expense.id}`))
+  .json(serializeExpense(expense))
 })
 .catch(next)
   })
 })
 
 expenseRouter
-.route('/expenses/:id')
-.get((req, res, next) => {
-  const knexInstance = req.app.get('db')
-  ExpenseService
-  .getById(knexInstance, req.params.expenseId)
-  .then(expense => {
-    if (!expense) {
+.route('/api/expenses/:expense_id').all((req, res, next) => {
+  ExpenseService.getById(
+    req.app.get('db'), req.params.expense_id
+  ).then(expense => {
+    if(!expense) {
       return res.status(404).json({
         error: { message: `Expense doesn't exist` }
       })
     }
-    res.json(expense)
+    res.expense = expense //save the expense for the next middleware
+next() //don't forget to call next so the next middleware happens!
   })
   .catch(next)
 })
-.delete((req, res) => {
-  /* insert code here*/
-  //delete expenses from budget_expense table
-  //need to make this work with /api/expense/:expenseId
-  const { id } = req.params;
+.get((req, res, next) => {
+  res.json({
+    id: res.expense.id,
+    name: res.expense.name,
+    type_id: res.expense.type_id,
+    category: res.expense.category,
+    date: res.expense.date
+  })
   
-  const index = expenses.findIndex(e => e.id === id);
-
-  //make sure there is actually data at that id
-  if (index === -1 ) {
-    return res
-    .status(404)
-    .send('Expense not found');
+  }).delete((req, res, next) => {
+    ExpenseService.deleteExpense(
+      req.app.get('db'), 
+      req.params.expense_id
+    )
+    .then(numRowsAffected => {
+      res.status(204).end()
+    })
+    .catch(next) 
+}).patch(jsonParser, (req, res, next) => {
+  const { name, amount, type_id, category } = req.body
+  const expenseToUpdate = { name, amount, type_id, category }
+  const numberOfValues = Object.values(expenseToUpdate).filter(Boolean).length
+  if (numberOfValues === 0) {
+    return res.status(400).json({
+      error: {
+        message: `Request body must contain either 'title', 'style' or 'content'`
+      }
+    })
   }
 
-  handleGetExpenses.splice(index, 1);
-  
-  res
-  .status(204)
-  .end();
+  ExpenseService.updateArtile(
+    req.app.get('db',
+    req.params.expense_id,
+    expenseToUpdate)
+    )
+    .then(numRowsAffected => {
+      res.status(204)
+      .end()
+      .catch(next)
+    })
 });
-
-expenseRouter.put('/', (req, res) => {
-  //update budget_expense table with new expense
-  res.send('PUT Request received');
-})
   
   module.exports = expenseRouter;

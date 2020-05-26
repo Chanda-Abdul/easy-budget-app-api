@@ -52,4 +52,6 @@ const ExpenseService = {
       },
 };
 
+//serializeExpense
+
 module.exports = ExpenseService;

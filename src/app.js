@@ -28,7 +28,7 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 const knexTest = db.select().table("expense_type");
 
 
-app.use('/expenses', expenseRouter);
+app.use('/api/expenses', expenseRouter);
 // app.use(createRouter)
 app.use(morgan(morganOption));
 app.use(helmet());
