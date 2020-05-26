@@ -6,6 +6,7 @@ const cors = require("cors");
 const { NODE_ENV, CLIENT_ORIGIN, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
+const app = express();
 
 //import routers
 const expenseRouter = require("./routes/expense-router");
@@ -19,14 +20,15 @@ const db = knex({
   connection: DB_URL,
 });
 
-const app = express();
+app.set("db", db);
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 const knexTest = db.select().table("expense_type");
 
-app.set("db", db);
-app.use(expenseRouter);
+
+app.use('/expenses', expenseRouter);
 // app.use(createRouter)
 app.use(morgan(morganOption));
 app.use(helmet());
@@ -51,16 +53,6 @@ app.use(function errorHandler(error, req, res, next) {
   }
   res.status(500).json(response);
 });
-
-// //endpoints => move later
-// app.get('/create', (req, res) => {
-
-// })
-// //budget endpoint => move later
-// app.get('/budget', (req, res) => {
-//   //search options by type or category
-
-// })
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);

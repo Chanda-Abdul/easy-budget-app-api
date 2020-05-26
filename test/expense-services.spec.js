@@ -42,7 +42,9 @@ describe(`Expenses service object`, function () {
 
   context(`Given 'budget_expenses' has data`, () => {
     beforeEach(() => {
-      return db.into("budget_expenses").insert(testExpenses);
+      return db
+      .into("budget_expenses")
+      .insert(testExpenses);
     });
     it(`getAllExpenses() resolves all expenses from 'budget_expenses' table`, () => {
       //test that ExpenseService.getAllExpenses gets data from table
