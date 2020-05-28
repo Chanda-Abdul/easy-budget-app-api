@@ -1,20 +1,22 @@
-INSERT INTO budget_expenses (id, name, amount, type_id, category)
+TRUNCATE table "budget_expenses";
+
+INSERT INTO budget_expenses (name, amount, type_id, category)
 VALUES
-  (1, 'Rent', 1200.00 , 1, 'Recurring'),
-  (2, 'PG&E', 50.00 , 2, 'Recurring'),
-  (3, 'Gas', 25.00 , 3, 'Recurring'),
-  (4, 'AT&T', 50.00 , 4, 'Recurring'),
-  (5, 'Verizon', 50.00 , 5, 'Recurring'),
-  (6, 'Waterworks', 25.00 , 6, 'Recurring'),
-  (7, 'Savings', 400.00 , 7, 'Savings/Investments'),
-  (8, 'Car Payment', 475.00 , 10, 'Discretionary'),
-  (9, 'Shell Gas', 75.00 , 10, 'Discretionary'),
-  (10, 'West Elm', 2475.00 , 15, 'Discretionary'),
-  (11, 'Trader Joes', 275.00 , 12, 'Discretionary'),
-  (12, 'Eat Inn', 175.00 , 11, 'Discretionary'),
-  (13, 'Amazon', 675.00 , 14, 'Discretionary'),
-  (14, 'Lemonade Renters Insurance', 22.00 , 21, 'Discretionary'),
-  (15, 'Feed America', 400.00 , 17, 'Discretionary');
+  ('Rent', 1200.00 , 1, 'Recurring'),
+  ('PG&E', 50.00 , 2, 'Recurring'),
+  ('Gas', 25.00 , 3, 'Recurring'),
+  ('AT&T', 50.00 , 4, 'Recurring'),
+  ('Verizon', 50.00 , 5, 'Recurring'),
+  ('Waterworks', 25.00 , 6, 'Recurring'),
+  ('Savings', 400.00 , 7, 'Savings/Investments'),
+  ('Car Payment', 475.00 , 10, 'Discretionary'),
+  ('Shell Gas', 75.00 , 10, 'Discretionary'),
+  ('West Elm', 2475.00 , 15, 'Discretionary'),
+  ('Trader Joes', 275.00 , 12, 'Discretionary'),
+  ('Eat Inn', 175.00 , 11, 'Discretionary'),
+  ('Amazon', 675.00 , 14, 'Discretionary'),
+  ('Lemonade Renters Insurance', 22.00 , 21, 'Discretionary'),
+  ('Feed America', 400.00 , 17, 'Discretionary');
                
 --   (1, 'Rent'),
 --   (2, 'Electricity'),

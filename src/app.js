@@ -28,7 +28,7 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 const knexTest = db.select().table("expense_type");
 
 
-app.use('/api/expenses', expenseRouter);
+app.use(expenseRouter);
 // app.use(createRouter)
 app.use(morgan(morganOption));
 app.use(helmet());
@@ -41,6 +41,10 @@ app.use(
 
 // console.log(knexTest);
 console.log(PORT, DB_URL);
+
+app.get('/', (req, res) => {
+  res.send('Hello from app.js')
+})
 
 //error handler middleware, move to middleware folder later
 app.use(function errorHandler(error, req, res, next) {
