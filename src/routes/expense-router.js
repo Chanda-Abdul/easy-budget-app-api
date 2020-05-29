@@ -11,7 +11,7 @@ const knex = require("knex");
 expenseRouter
 .route('/expenses')
 .get((req, res, next) => {
-  ExpenseService.getExpenses(
+  ExpenseService.getAllExpenses(
     req.app.get('db')
   )
   .then(expenses => {
