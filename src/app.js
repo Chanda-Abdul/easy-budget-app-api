@@ -10,10 +10,9 @@ const app = express();
 
 //import routers
 const expenseRouter = require("./routes/expense-router");
-// const createRouter = require('./routes/create-router')
 
 //import services
-const ExpenseService = require("./services/expense-service");
+const expenseService = require("./services/expense-service");
 
 const db = knex({
   client: "pg",
