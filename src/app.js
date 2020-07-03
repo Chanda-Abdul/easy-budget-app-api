@@ -3,7 +3,7 @@ const knex = require("knex");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { NODE_ENV, CLIENT_ORIGIN, PORT, DB_URL } = require("./config");
+const { NODE_ENV, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const app = express();
@@ -28,15 +28,10 @@ const knexTest = db.select().table("expense_type");
 
 
 app.use(expenseRouter);
-// app.use(createRouter)
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(express.json());
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN,
-  })
-);
+app.use(cors());
 
 // console.log(knexTest);
 console.log(PORT, DB_URL);
