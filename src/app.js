@@ -1,28 +1,46 @@
 require("dotenv").config();
+const knex = require("knex");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { CLIENT_ORIGIN } = require("./config");
+const { NODE_ENV, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
-const { NODE_ENV } = require("./config");
-
+const bodyParser = require("body-parser");
 const app = express();
 
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN,
-  })
-);
+//import routers
+const expenseRouter = require("./routes/expense-router");
 
-const morganOption = NODE_ENV === "production" ? "tiny" : "common";
+//import services
+const expenseService = require("./services/expense-service");
 
-app.use(morgan(morganOption));
-app.use(helmet());
-
-app.get("/", (req, res) => {
-  res.send("Hello, world!");
+const db = knex({
+  client: "pg",
+  connection: DB_URL,
 });
 
+app.set("db", db);
+
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true }));
+const morganOption = NODE_ENV === "production" ? "tiny" : "common";
+const knexTest = db.select().table("expense_type");
+
+
+app.use(expenseRouter);
+app.use(morgan(morganOption));
+app.use(helmet());
+app.use(express.json());
+app.use(cors());
+
+// console.log(knexTest);
+console.log(PORT, DB_URL);
+
+app.get('/', (req, res) => {
+  res.send('Hello from app.js')
+})
+
+//error handler middleware, move to middleware folder later
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === "production") {
@@ -34,6 +52,8 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response);
 });
 
-app.use(cors());
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`);
+});
 
 module.exports = app;
