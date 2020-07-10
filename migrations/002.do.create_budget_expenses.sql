@@ -1,3 +1,9 @@
+CREATE TYPE budget_category AS ENUM (
+   'Recurring',
+   'Savings/Investments', 
+   'Discretionary'
+);
+
 CREATE TABLE budget_expenses (
     id serial PRIMARY KEY,
     name TEXT NOT NULL,
@@ -7,11 +13,7 @@ CREATE TABLE budget_expenses (
     date TIMESTAMPTZ DEFAULT now() NOT NULL
 );
 
-CREATE TYPE budget_category AS ENUM (
-   'Recurring',
-   'Savings/Investments', 
-   'Discretionary'
-);
+
 
 
 
