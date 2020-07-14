@@ -42,10 +42,8 @@ Easy budget is an interactive web application that was created to view and manag
 # 
 # Easy Budget API
 Easy Budget's back-end consists of an API server that was created with Node.js, Express, Knex, and PostgreSQL
-# 
+ 
 ### Easy Budget's API service consists of `/GET` `/DELETE` `/POST` and `/PATCH` endpoints
-
-# 
 
 The API was created locally and deployed to heroku.  The API can be accessed through heroku [here](https://fast-garden-40399.herokuapp.com/).
 
