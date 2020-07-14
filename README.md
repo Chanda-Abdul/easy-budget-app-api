@@ -64,10 +64,7 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 
 - The database creation scripts can be found at `/migrations`
 - The database is initially seeded with data that can be found at `/scripts/seeds`
-- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed 
-[here](postgres://ymzzpjmz:kUdfw2oErRwCaXcuLHqSq0mBimn9DRmm@hanno.db.elephantsql.com:5432/ymzzpjmz)
-
-[here](https://fast-garden-40399.herokuapp.com/).
+- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2oErRwCaXcuLHqSq0mBimn9DRmm@hanno.db.elephantsql.com:5432/ymzzpjmz)
 
 - The PostgreSQL database consists of two tables 
     - <b>budget_expenses</b> 
