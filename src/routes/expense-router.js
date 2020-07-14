@@ -1,6 +1,5 @@
 const path = require("path");
 const express = require("express");
-const { v4: uuid } = require('uuid');
 const logger = require('../logger')
 const ExpenseService = require('../services/expense-service');
 const expenseRouter = express.Router();

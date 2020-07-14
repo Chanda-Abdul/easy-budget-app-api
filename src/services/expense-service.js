@@ -1,12 +1,8 @@
-//handles any operations related to database
-//handling promises
-
 const ExpenseService = {
   getExpenses(knex) {
     return knex
     .select('*')
     .from("budget_expenses");
-//
   },
   insertExpense(knex, newExpense) {
     return knex
@@ -32,7 +28,6 @@ const ExpenseService = {
   getAllExpenses(knex, id) {
     return knex
     .select(
-      //save in a gist
           'budget_expenses.id',
           'budget_expenses.name',
           'budget_expenses.amount',

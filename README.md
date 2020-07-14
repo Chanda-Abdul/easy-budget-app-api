@@ -40,7 +40,8 @@ Link to the [Client Repo](https://github.com/ChandaHubbard/Easy-Budget-Client)
  
 - Easy Budget's API service consists of `/GET` `/DELETE` `/POST` and `/PATCH` endpoints
 
-- The API was created locally and deployed to heroku.  The API can be accessed through heroku [here](https://fast-garden-40399.herokuapp.com/).
+- The API was created locally and deployed to heroku.  The API can be accessed through heroku 
+[here](https://fast-garden-40399.herokuapp.com/).
 
 ### /GET at `/expenses`
 The user can access the `/GET` endpoint through the client by visiting the `/budget` page and all expenses will be displayed.  The `/GET` endpoint can also be accessed at `/expenses` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses](https://fast-garden-40399.herokuapp.com/expenses).

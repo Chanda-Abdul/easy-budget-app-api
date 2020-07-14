@@ -23,7 +23,6 @@ describe("Expenses Endpoints", function () {
   // const request = supertest(app);
 
   before("populate the table", (done) => {
-    // return db.into('budget_expenses').insert(testExpenses)
     makeExpensesArray().forEach(async (expense) => {
       await db.into("budget_expenses").insert(expense);
     });
