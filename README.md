@@ -58,11 +58,16 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 The user can access the `/GET` endpoint through the client by visiting the `/budget` page and all expenses will be displayed.  The `/GET` endpoint can also be accessed at `/expenses` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses](https://fast-garden-40399.herokuapp.com/expenses).
 
 #### /GET at `/expenses/:id`
-The `/GET/:id` endpoint can be accessed at `/expenses/:id` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses/:id](https://fast-garden-40399.herokuapp.com/expenses/1).
+The `/GET/:id` endpoint can be accessed at `/expenses/:id` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses/:id](https://fast-garden-40399.herokuapp.com/expenses/75).
 
 #### /DELETE at `/expenses/:id`
+The `/DELETE` endpoint is used to delete specific expenses by id. The user can access the `/DELETE` endpoint through the client by visiting the `/budget` page and selecting the <i>Delete</i> button next to the expense that they would like to delete.  The `/DELETE` endpoint can also be accessed at `/expenses` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses](https://fast-garden-40399.herokuapp.com/expenses).
+
 #### /POST at `/expenses`
+The user can access the `/POST` endpoint through the client by visiting the `/create` page an filling out the form then select the <i>Add Expense</i>.  The `/POST` endpoint can also be accessed at `/expenses` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses](https://fast-garden-40399.herokuapp.com/expenses).
+
 #### /PATCH at `/expenses/:id`
+The `/PATCH/:id` is used to update specifc expenses by id and the endpoint can be accessed at `/expenses/:id` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses/:id](https://fast-garden-40399.herokuapp.com/expenses/75).
 
 # 
 ### Easy Budget's API service consists of data that is stored in a PostgreSQL database
