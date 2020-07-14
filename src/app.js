@@ -7,7 +7,9 @@ const { NODE_ENV, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const app = express();
-app.use(expenseRouter);
+
+
+
 
 const db = knex({
   client: "pg",
@@ -15,6 +17,9 @@ const db = knex({
 });
 
 app.set("db", db);
+
+
+
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,11 +44,14 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response);
 });
 
-//import routers
+//import routers, must be above app.use(expenseRouter), but below middleware
 const expenseRouter = require("./routes/expense-router");
 
 //import services
 const expenseService = require("./services/expense-service");
+
+//issue here
+app.use(expenseRouter);
 
 const knexTest = db.select().table("expense_type");
 
