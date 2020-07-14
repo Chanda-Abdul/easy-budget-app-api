@@ -7,6 +7,7 @@ const { NODE_ENV, PORT, DB_URL } = require("./config");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const app = express();
+app.use(expenseRouter);
 
 const db = knex({
   client: "pg",
@@ -24,7 +25,7 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
-app.use(expenseRouter);
+
 
 //error handler middleware, move to middleware folder later
 app.use(function errorHandler(error, req, res, next) {
