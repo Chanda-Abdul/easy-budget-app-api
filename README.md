@@ -57,13 +57,15 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 ### Easy Budget's API service accesses data that is stored in an PostgreSQL database
 - The PostgreSQL database consists of two tables 
     - <b>budget_expenses</b> 
-    <img src="images/budget_expenses.png" alt="budget_expenses table" width="420px">
+    <img src="images/budget_expenses.png" alt="budget_expenses table">
     - <b>expense_type</b> 
+    <img src="images/expense_type.png" alt="expense_type table">
 - The tables share the relation of `expense_type(id)/budget_expenses(type_id)` and can be joined with the <b>PostgreSQL</b> query of 
 `SELECT budget_expenses.id, name, amount, type, category, date`
     `FROM budget_expenses` 
     `INNER JOIN expense_type` 
     `ON (budget_expenses.type_id = expense_type.id);`
+    <img src="images/tablejoin.png" alt="table join table">
 
 - The database creation scripts can be found at `/migrations`
 - The database is initially seeded with data that cab be found at `/seeds`
