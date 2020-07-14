@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const knex = require("knex");
-// const app = require("../src/app");
+const app = require("../src/app");
 const { TEST_DB_URL } = require("../src/config");
 const supertest = require("supertest");
 const { makeExpensesArray } = require("./expenses.fixtures.js");
@@ -19,7 +19,8 @@ describe("Expenses Endpoints", function () {
     connection: process.env.TEST_DB_URL,
   });
 
-  const request = supertest(app);
+  const request = supertest(db);
+  // const request = supertest(app);
 
   before("populate the table", (done) => {
     // return db.into('budget_expenses').insert(testExpenses)
