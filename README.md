@@ -3,9 +3,10 @@
 ## Programmer
 Chanda Hubbard
 
-# 
+## Summary
 
-While enrolled in Thinkful's Web Development bootcamp I created this full stack Capstone project.  
+While enrolled in Thinkful's Web Development bootcamp I created this full stack Capstone project.  Easy budget is an interactive web application that was created to view and manage your monthly budget.  This app was created so that you can view all of your monthly expenses and figure out whether they align with your financial goals.
+
 
 Link to the [Live heroku server](https://fast-garden-40399.herokuapp.com/)
 
@@ -32,12 +33,6 @@ Link to the [Client Repo](https://github.com/ChandaHubbard/Easy-Budget-Client)
 - PostgreSQL
     - Elephant SQL
 - Heroku
-
-# 
-
-## Summary
-
-Easy budget is an interactive web application that was created to view and manage your monthly budget.  This app was created so that you can view all of your monthly expenses and figure out whether they align with your financial goals.
 
 # 
 # Easy Budget API
