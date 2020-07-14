@@ -21,18 +21,10 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 const knexTest = db.select().table("expense_type");
 
 //middleware
-app.use(expenseRouter);
+app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
-app.use(express.json());
-app.use(cors());
-
-// console.log(knexTest);
-console.log(PORT, DB_URL);
-
-app.get('/', (req, res) => {
-  res.send('Hello from app.js')
-})
+app.use(expenseRouter);
 
 //error handler middleware, move to middleware folder later
 app.use(function errorHandler(error, req, res, next) {
@@ -47,12 +39,18 @@ app.use(function errorHandler(error, req, res, next) {
 });
 
 
+// console.log(knexTest);
+console.log(PORT, DB_URL);
+
 //import routers
 const expenseRouter = require("./routes/expense-router");
 
 //import services
 const expenseService = require("./services/expense-service");
 
+app.get('/', (req, res) => {
+  res.send('Hello from app.js')
+})
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);
