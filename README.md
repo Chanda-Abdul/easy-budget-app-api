@@ -54,29 +54,27 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 #### /POST at `/expenses`
 #### /PATCH at `/expenses/:id`
 
-### Easy Budget's API service accesses data that is stored in an PostgreSQL database
+### Easy Budget's API service consists of data that is stored in a PostgreSQL database
+- The database creation scripts can be found at `/migrations`
+- The database is initially seeded with data that can be found at `/seeds`
+- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2...@hanno.db.elephantsql.com:5432/ymzzpjmz)
 - The PostgreSQL database consists of two tables 
     - <b>budget_expenses</b> 
     <img src="images/budget_expenses.png" alt="budget_expenses table">
 
     - <b>expense_type</b> 
     <img src="images/expense_type.png" alt="expense_type table">
-- The tables share the relation of `expense_type(id)/budget_expenses(type_id)` and can be joined with the <b>PostgreSQL</b> query of <br>
-`SELECT budget_expenses.id, name, amount, type, category, date`
-    <br> `FROM budget_expenses` 
-    <br>`INNER JOIN expense_type` 
-    <br>`ON (budget_expenses.type_id = expense_type.id);`
-    <br><img src="images/tablejoin.png" alt="table join table">
 
-- The database creation scripts can be found at `/migrations`
-- The database is initially seeded with data that cab be found at `/seeds`
-- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2...@hanno.db.elephantsql.com:5432/ymzzpjmz)
-<!-- 
-
-Documentation of your API.
+    - The tables share the relation of `expense_type(id)/budget_expenses(type_id)` and can be joined with the <b>PostgreSQL</b> query of <br>
+    `SELECT budget_expenses.id, name, amount, type, category, date`
+        <br> `FROM budget_expenses` 
+        <br>`INNER JOIN expense_type` 
+        <br>`ON (budget_expenses.type_id = expense_type.id);`
+        <br><br>
+        <img src="images/tablejoin.png" alt="table join table">
 
 
- -->
+
 
 ## Scripts
 
@@ -84,9 +82,6 @@ Documentation of your API.
 
 - To run the test suite enter `npm test` in the terminal
 
-## Deployment
-
-- To deploy the app enter `npm run build` then `npm run deploy` in the terminal
 
 
 
