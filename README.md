@@ -66,12 +66,15 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
     <img src="images/expense_type.png" alt="expense_type table">
 
     - The tables share the relation of `expense_type(id)/budget_expenses(type_id)` and can be joined with the <b>PostgreSQL</b> query of <br>
-    `SELECT budget_expenses.id, name, amount, type, category, date`
-        <br> `FROM budget_expenses` 
-        <br>`INNER JOIN expense_type` 
-        <br>`ON (budget_expenses.type_id = expense_type.id);`
-        <br><br>
-        <img src="images/tablejoin.png" alt="table join table">
+
+````
+SELECT budget_expenses.id, name, amount, type, category, date
+FROM budget_expenses
+INNER JOIN expense_type
+ON (budget_expenses.type_id = expense_type.id);
+````
+<br><br>
+<img src="images/tablejoin.png" alt="table join table">
 
 
 
