@@ -28,6 +28,7 @@ Link to the [Client Repo](https://github.com/ChandaHubbard/Easy-Budget-Client)
 - Express
     - Knex
     - Mocha, Chai & Supertest
+    - Morgan, CORS, Helmet
 - PostgreSQL
     - Elephant SQL
 - Heroku
@@ -53,7 +54,11 @@ Easy Budget's back-end consists of an API server that was created with Node.js, 
 The API was created locally and deployed to heroku.  The API can be accessed through heroku [here](https://fast-garden-40399.herokuapp.com/).
 
 #### /GET at `/expenses`
+The user can access the `/GET` endpoint through the client by visiting the `/budget` page and all expenses will be displayed.  The `/GET` endpoint can also be accessed at `/expenses` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses](https://fast-garden-40399.herokuapp.com/expenses).
+
 #### /GET at `/expenses/:id`
+The `/GET/:id` ndpoint can also be accessed at `/expenses/:id` on the back-end through the heroku server at [https://fast-garden-40399.herokuapp.com/expenses/1](https://fast-garden-40399.herokuapp.com/expenses/:id).
+
 #### /DELETE at `/expenses/:id`
 #### /POST at `/expenses`
 #### /PATCH at `/expenses/:id`
@@ -64,7 +69,8 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 
 - The database creation scripts can be found at `/migrations`
 - The database is initially seeded with data that can be found at `/scripts/seeds`
-- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2oErRwCaXcuLHqSq0mBimn9DRmm@hanno.db.elephantsql.com:5432/ymzzpjmz)
+- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed 
+[here](postgres://ymzzpjmz:kUdfw2oErRwCaXcuLHqSq0mBimn9DRmm@hanno.db.elephantsql.com:5432/ymzzpjmz)
 
 - The PostgreSQL database consists of two tables 
     - <b>budget_expenses</b> 
@@ -84,51 +90,9 @@ ON (budget_expenses.type_id = expense_type.id);
 <br><br>
 <img src="images/tablejoin.png" alt="table join table">
 
-
-
-
-## Scripts
-
-- To start the application enter `npm start` in the terminal
-
-- To run the test suite enter `npm test` in the terminal
-
-
-
-
+# 
 
 ## Other features to implement in future versions
 
-<!-- [ ] Figure out how to handle edge cases for movie input
-<br/>
-[ ] Incorporate an additional API that will let the user know which streaming service currently offers their movie selection for viewing. -->
+[ ] Incorporate the `/PATCH` endpoint into the client. 
 
- -->
-
-
-# Express Boilerplate!
-
-This is a boilerplate project used for starting new projects!
-
-## Set up
-
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
-
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
-
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
