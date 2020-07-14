@@ -18,7 +18,7 @@ app.set("db", db);
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
-const knexTest = db.select().table("expense_type");
+
 
 //middleware
 app.use(cors());
@@ -38,15 +38,18 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response);
 });
 
-
-// console.log(knexTest);
-console.log(PORT, DB_URL);
-
 //import routers
 const expenseRouter = require("./routes/expense-router");
 
 //import services
 const expenseService = require("./services/expense-service");
+
+const knexTest = db.select().table("expense_type");
+
+
+// console.log(knexTest);
+console.log(PORT, DB_URL);
+
 
 app.get('/', (req, res) => {
   res.send('Hello from app.js')
