@@ -42,17 +42,32 @@ Easy budget is an interactive web application that was created to view and manag
 
 ## Easy Budget API
 
-Easy Budget's back-end consists of an API server that was created with Node.js, Express, knex, and PostgreSQL
+Easy Budget's back-end consists of an API server that was created with Node.js, Express, Knex, and PostgreSQL
 
-#### Easy Budget's API service consists of /GET /DELETE /POST and /PATCH endpoints
+### Easy Budget's API service consists of /GET /DELETE /POST and /PATCH endpoints
 
-##### /GET at `/expenses`
-##### /GET at `/expenses/:id`
-##### /DELETE at `/expenses/:id`
-##### /POST at `/expenses`
-##### /PATCH at `/expenses/:id`
+The API was created locally and deployed to heroku.  The API can be accessed through heroku [here](https://fast-garden-40399.herokuapp.com/).
 
-#### Easy Budget's API service accesses data that is stored in an PostgreSQL database
+#### /GET at `/expenses`
+#### /GET at `/expenses/:id`
+#### /DELETE at `/expenses/:id`
+#### /POST at `/expenses`
+#### /PATCH at `/expenses/:id`
+
+### Easy Budget's API service accesses data that is stored in an PostgreSQL database
+- The PostgreSQL database consists of two tables 
+    - <b>budget_expenses</b> 
+    <img src="images/budget_expenses.png" alt="budget_expenses table" width="420px">
+    - <b>expense_type</b> 
+- The tables share the relation of `expense_type(id)/budget_expenses(type_id)` and can be joined with the <b>PostgreSQL</b> query of 
+`SELECT budget_expenses.id, name, amount, type, category, date`
+    `FROM budget_expenses` 
+    `INNER JOIN expense_type` 
+    `ON (budget_expenses.type_id = expense_type.id);`
+
+- The database creation scripts can be found at `/migrations`
+- The database is initially seeded with data that cab be found at `/seeds`
+- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2...@hanno.db.elephantsql.com:5432/ymzzpjmz)
 <!-- 
 
 Documentation of your API.
