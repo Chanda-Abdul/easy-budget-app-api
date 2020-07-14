@@ -5,7 +5,7 @@ Chanda Hubbard
 
 # 
 
-While enrolled in Thinkful's Web Development bootcamp I created this Full-stack Capstone project.  
+While enrolled in Thinkful's Web Development bootcamp I created this full stack Capstone project.  
 
 Link to the [Live heroku server](https://fast-garden-40399.herokuapp.com/)
 
@@ -44,7 +44,7 @@ Easy budget is an interactive web application that was created to view and manag
 
 Easy Budget's back-end consists of an API server that was created with Node.js, Express, Knex, and PostgreSQL
 
-# 
+
 
 ### Easy Budget's API service consists of `/GET` `/DELETE` `/POST` and `/PATCH` endpoints
 
@@ -63,8 +63,12 @@ The API was created locally and deployed to heroku.  The API can be accessed thr
 # 
 
 - The database creation scripts can be found at `/migrations`
-- The database is initially seeded with data that can be found at `/seeds`
-- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed [here](postgres://ymzzpjmz:kUdfw2...@hanno.db.elephantsql.com:5432/ymzzpjmz)
+- The database is initially seeded with data that can be found at `/scripts/seeds`
+- Both tables are hosted remotely on <b>ElephantSQL</b> and can be accessed 
+[here](postgres://ymzzpjmz:kUdfw2oErRwCaXcuLHqSq0mBimn9DRmm@hanno.db.elephantsql.com:5432/ymzzpjmz)
+
+[here](https://fast-garden-40399.herokuapp.com/).
+
 - The PostgreSQL database consists of two tables 
     - <b>budget_expenses</b> 
     <img src="images/budget_expenses.png" alt="budget_expenses table">
